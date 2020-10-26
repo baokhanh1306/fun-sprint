@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import routes from './routes';
 import mongoose from 'mongoose';
 import { handleError } from './middlewares/ErrorHandler';
+import path from 'path';
 
 dotenv.config();
 
@@ -19,6 +20,10 @@ const app = express();
 app.use(express.json());
 
 app.use('/api', routes);
+
+app.get('*', (req,res) => {
+	res.sendFile(path.join(__dirname + '/client/build/index.html'));
+})
 
 app.use((err, req, res, next) => {
 	handleError(err, res);
