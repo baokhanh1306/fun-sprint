@@ -5,8 +5,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node --experimental-modules --es-module-specifier-resolution=node index.js",
-    "dev": "nodemon --experimental-modules --es-module-specifier-resolution=node index.js"
+    "start": "node -r esm index.js",
+    "dev": "nodemon -r esm index.js"
   },
   "keywords": [],
   "author": "Bao Khanh",
