@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from '../../utils/api';
 import {
-    Button,
+	Button,
 	Card,
-    CardActions,
+	CardActions,
 	CardContent,
 	Grid,
 	makeStyles,
@@ -12,17 +12,17 @@ import {
 
 const useStyles = makeStyles((theme) => ({
 	root: {
-        flexGrow: 1,
+		flexGrow: 1,
 	},
 	card: {
 		minWidth: 275,
 	},
 	pos: {
 		marginBottom: 12,
-    },
-    btn: {
-        fontSize: "1.4rem" 
-    }
+	},
+	btn: {
+		fontSize: '1.4rem',
+	},
 }));
 
 const Board = () => {
@@ -51,7 +51,11 @@ const Board = () => {
 					<Grid item lg={3}>
 						<Card className={classes.card}>
 							<CardContent>
-								<Typography variant="h5" component="h2" gutterBottom>
+								<Typography
+									variant="h5"
+									component="h2"
+									gutterBottom
+								>
 									{board.name}
 								</Typography>
 								<Typography
@@ -61,9 +65,11 @@ const Board = () => {
 									{new Date(board.createdAt).toDateString()}
 								</Typography>
 							</CardContent>
-                            <CardActions>
-                                <Button className={classes.btn} color="primary">URL</Button>
-                            </CardActions>
+							<CardActions>
+								<Button className={classes.btn} color="primary">
+									URL
+								</Button>
+							</CardActions>
 						</Card>
 					</Grid>
 				))}
