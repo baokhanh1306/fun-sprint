@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from '../../utils/api';
+import api from '../../utils/api';
 import {
 	Button,
 	Card,
@@ -9,6 +9,8 @@ import {
 	makeStyles,
 	Typography,
 } from '@material-ui/core';
+import BoardModal from './BoardModal';
+import history from '../../utils/history';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -26,30 +28,43 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Board = () => {
+	const [modalIsOpen, setModalIsOpen] = useState(false);
+	const [boardId, setBoardId] = useState('');
+	const openModal = (id) => {
+		setModalIsOpen(true);
+		setBoardId(id);
+	};
+
+	const closeModal = () => {
+		setModalIsOpen(false);
+		setBoardId('');
+	};
 	const classes = useStyles();
 	const [boards, setBoards] = useState([]);
 	useEffect(() => {
 		const fetchBoards = async () => {
 			const {
 				data: { boards },
-			} = await axios.get('/boards', {
-				headers: {
-					authorization:
-						'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjEyM0BnbWFpbC5jb20iLCJpYXQiOjE2MDM1NjYzMTF9.eTBar_MmS4z-dzDWw_wMcAOmS68gcJyhBqEM7By_Z4E',
-				},
-			});
-			console.log(boards);
+			} = await api.get('/boards');
 			setBoards(boards);
 		};
 		fetchBoards();
-		console.log(boards);
-	}, []);
+	}, [boards]);
+
+	const handleDelete = async (id) => {
+		await api.delete(`/boards/${id}`);
+	}
+
+	const handleRename = async (name) => {
+		await api.put(`/boards/${boardId}`, { name });
+		closeModal();
+	}
 	return (
 		<div className={classes.root}>
 			<Grid container spacing={3}>
 				{boards.map((board) => (
 					<Grid item lg={3}>
-						<Card className={classes.card}>
+						<Card className={classes.card} onClick={() => history.push(`/boards/${board._id}`)}>
 							<CardContent>
 								<Typography
 									variant="h5"
@@ -69,6 +84,13 @@ const Board = () => {
 								<Button className={classes.btn} color="primary">
 									URL
 								</Button>
+								<Button className={classes.btn} color="primary" onClick={() => handleDelete(board._id)}>
+									Delete
+								</Button>
+								<Button className={classes.btn} color="primary" onClick={() => openModal(board._id)}>
+									Rename
+								</Button>
+								<BoardModal modalIsOpen={modalIsOpen} closeModal={closeModal} handleConfirm={handleRename} />
 							</CardActions>
 						</Card>
 					</Grid>

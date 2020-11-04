@@ -1,12 +1,17 @@
 import React from 'react';
 import { Form } from '../components';
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
+import { login } from '../store/user';
 
 const LoginForm = () => {
 	const { register, handleSubmit, formState, errors } = useForm();
-    const { isDirty } = formState;
+	const { isDirty } = formState;
+	const dispatch = useDispatch();
 
-	const onSubmit = (data) => console.log(data);
+	const onSubmit = (data) => {
+		dispatch(login(data));
+	};
 	return (
 		<Form onSubmit={handleSubmit(onSubmit)}>
 			<Form.Title>Login</Form.Title>

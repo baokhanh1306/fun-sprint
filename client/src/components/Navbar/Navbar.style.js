@@ -32,3 +32,13 @@ export const Item = styled(Link)`
     text-transform: uppercase;
     font-weight: 600;
 `;
+
+export const Button = styled.button`
+	padding: 0.5rem 0.5rem;
+	font-size: 1.4rem;
+	border-radius: 1rem;
+
+	&:hover {
+		opacity: 0.8;
+	}
+`;

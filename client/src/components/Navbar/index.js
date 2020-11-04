@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Item, Links, Logo } from './Navbar.style';
+import { Button, Container, Item, Links, Logo } from './Navbar.style';
 
 const Navbar = ({ children, ...restProps }) => {
 	return <Container {...restProps}>{children}</Container>;
@@ -15,6 +15,10 @@ Navbar.Item = ({ children, ...restProps }) => {
 
 Navbar.Links = ({ children, ...restProps }) => {
     return <Links {...restProps}>{children}</Links>
+}
+
+Navbar.Button = ({ children, ...restProps }) => {
+    return <Button {...restProps}>{children}</Button>
 }
 
 export default Navbar;
