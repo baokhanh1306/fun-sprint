@@ -14,10 +14,14 @@ const NavbarContainer = () => {
 
 	const handleClick = () => {
 		dispatch(logout());
-	}
+	};
 	return (
 		<Navbar>
-			<Navbar.Logo to="/">Funretro</Navbar.Logo>
+			{!!user.user ? (
+				<Navbar.Logo to="/dashboard">Funretro</Navbar.Logo>
+			) : (
+				<Navbar.Logo to="/">Funretro</Navbar.Logo>
+			)}
 			{!!user.user ? (
 				<Navbar.Links>
 					<User>{user.user}</User>

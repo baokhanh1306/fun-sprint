@@ -1,11 +1,6 @@
 import mongoose from 'mongoose';
+import { actionSchema } from '../actions/action.model';
 
-const actionSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: true
-    }
-})
 
 const boardSchema = new mongoose.Schema({
     user: mongoose.Types.ObjectId,

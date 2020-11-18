@@ -11,7 +11,6 @@ import {
 	Typography,
 } from '@material-ui/core';
 import BoardModal from './BoardModal';
-import history from '../../utils/history';
 import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({

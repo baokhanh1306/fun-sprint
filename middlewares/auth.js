@@ -19,3 +19,5 @@ export default catchAsync(async (req, res, next) => {
 	req.token = token;
 	next();
 });
+
+

@@ -35,7 +35,20 @@ export const login = (credentials) => async (dispatch) => {
 		const { email, token } = res.data;
 		localStorage.setItem('token', token);
         dispatch(loginSuccess(email));
-        history.push('/');
+        history.push('/dashboard');
+	} catch (error) {
+		dispatch(loginFailure(error.response.data.message));
+	}
+};
+
+export const googleLogin = (code) => async(dispatch) => {
+    try{
+        dispatch(loginRequest());
+        const res = await api.post('/users/google', { code } );
+        const { email, token } = res.data;
+        localStorage.setItem('token', token);
+        dispatch(loginSuccess(email));
+        history.push('/dashboard');
 	} catch (error) {
 		dispatch(loginFailure(error.response.data.message));
 	}

@@ -6,7 +6,7 @@ import api from '../../utils/api';
 import BoardModal from '../../components/Board/BoardModal';
 
 const Container = styled.div`
-	min-height: calc(100vh-4rem);
+	min-height: calc(100vh - 4rem);
 	width: 80%;
 	margin: auto;
 `;
@@ -26,6 +26,7 @@ const Button = styled.button`
 	border: none;
 	outline: none;
 	border-radius: 0.5rem;
+	margin-bottom: 1rem;
 `;
 
 const Dashboard = () => {
